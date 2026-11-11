@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mikasa.bo - Alquiler y Venta Directa en Bolivia</title>
+    <meta name="description" content="Alquila o compra casas, departamentos y edificios directo con el propietario en Bolivia. Sin comisiones de inmobiliarias.">
+    <meta property="og:title" content="mikasa.bo - Alquiler y Venta Directa en Bolivia">
+    <meta property="og:description" content="Habla directo por WhatsApp con el dueño. Sin comisiones abusivas.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27%23E6007E%27/%3E%3Ctext x=%2750%27 y=%2772%27 font-size=%2760%27 text-anchor=%27middle%27%3E🏠%3C/text%3E%3C/svg%3E">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blush: '#FFF0F5',      /* Soft pink background highlight */
+                            pink: '#E6007E',       /* Vivid Fuchsia Pink */
+                            pinkHover: '#C4006B',
+                            lilac: '#F3E5F5',      /* Light Lilac highlight */
+                            lilacBorder: '#E1BEE7',
+                            yellow: '#FFD600',     /* Energetic Yellow */
+                            yellowHover: '#E6C200',
+                            dark: '#18181B',       /* Deep Charcoal Text */
+                            cardBg: '#FFFFFF'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAFAFB;
+            color: #18181B;
+        }
+        .font-display {
+            font-family: 'Outfit', sans-serif;
+        }
+        .vivid-glow {
+            box-shadow: 0 10px 30px -5px rgba(230, 0, 126, 0.25);
+        }
+        .yellow-glow {
+            box-shadow: 0 8px 25px -4px rgba(255, 214, 0, 0.4);
+        }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F3E5F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E6007E;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-pink selection:text-white">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-40 glass-header border-b border-brand-lilacBorder shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <div class="flex items-center gap-4">
+                    <!-- Hamburger Menu Button (Three Lines) -->
+                    <div class="relative">
+                        <button onclick="toggleCityMenu()" class="w-10 h-10 rounded-xl bg-brand-blush hover:bg-brand-lilac text-brand-pink border border-brand-lilacBorder flex items-center justify-center text-xl transition">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+
+                        <!-- Cities Dropdown Menu (9 Bolivia Cities) -->
+                        <div id="cityMenuDropdown" class="absolute left-0 mt-2 w-64 bg-white border-2 border-brand-lilacBorder rounded-2xl shadow-2xl p-4 hidden z-50">
+                            <div class="flex items-center justify-between pb-2 mb-2 border-b border-gray-100">
+                                <span class="text-xs font-extrabold text-brand-pink uppercase tracking-wider" data-i18n="menuSearchCity">Buscar por ciudad</span>
+                                <i class="fa-solid fa-location-dot text-brand-pink text-xs"></i>
+                            </div>
+                            <div class="space-y-1 text-xs font-bold text-gray-700">
+                                <button onclick="selectCity('Santa Cruz')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-brand-blush hover:text-brand-pink transition flex items-center justify-between">
+                                    <span>Santa Cruz</span>
+                                    <span class="text-[10px] bg-brand-pink/10 text-brand-pink px-2 py-0.5 rounded-full font-extrabold">Principal</span>
+                                </button>
+                                <button onclick="selectCity('La Paz')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-brand-blush hover:text-brand-pink transition">La Paz</button>
+                                <button onclick="selectCity('Cochabamba')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-brand-blush hover:text-brand-pink transition">Cochabamba</button>
+                                <button onclick="selectCity('Sucre')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-brand-blush hover:text-brand-pink transition">Sucre</button>
+                                <button onclick="selectCity('Tarija')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-brand-blush hover:text-brand-pink transition">Tarija</button>
+                                <button onclick="selectCity('Oruro')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-brand-blush hover:text-brand-pink transition">Oruro</button>
+                                <button onclick="selectCity('Potosí')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-brand-blush hover:text-brand-pink transition">Potosí</button>
+                                <button onclick="selectCity('Beni')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-brand-blush hover:text-brand-pink transition">Beni (Trinidad)</button>
+                                <button onclick="selectCity('Pando')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-brand-blush hover:text-brand-pink transition">Pando (Cobija)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Brand Logo -->
+                    <a href="#" class="flex items-center gap-2.5 group">
+                        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-pink to-pink-400 flex items-center justify-center text-white text-xl font-bold shadow-md transform group-hover:scale-105 transition">
+                            <i class="fa-solid fa-house-circle-check"></i>
+                        </div>
+                        <div>
+                            <span class="font-display text-2xl font-extrabold tracking-tight text-brand-dark">mi<span class="text-brand-pink">kasa</span>.bo</span>
+                            <span class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest -mt-1" data-i18n="tagDirectDeal">Trato Directo</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-700">
+                    <button onclick="filterType('Alquiler')" class="hover:text-brand-pink transition" data-i18n="navRent">Alquileres</button>
+                    <button onclick="filterType('Venta')" class="hover:text-brand-pink transition" data-i18n="navBuy">Ventas</button>
+                    <button onclick="filterType('Corporativo')" class="hover:text-brand-pink transition" data-i18n="navCorporate">Edificios / Corporativo</button>
+                    <a href="#propietarios" class="hover:text-brand-pink transition" data-i18n="navOwners">Propietarios</a>
+                </nav>
+
+                <!-- Actions: Language Switcher & Post CTA -->
+                <div class="flex items-center gap-2 sm:gap-4 ml-2">
+                    <!-- Owner Post Button (Compact on mobile) -->
+                    <button onclick="openPublishModal()" class="px-2.5 py-1.5 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl bg-brand-yellow hover:bg-brand-yellowHover text-brand-dark font-extrabold text-[10px] sm:text-xs tracking-wide uppercase yellow-glow transition transform hover:-translate-y-0.5 flex items-center gap-1.5 whitespace-nowrap">
+                        <i class="fa-solid fa-plus-circle text-xs sm:text-base"></i>
+                        <span data-i18n="btnPublishFree">Publicar Gratis</span>
+                    </button>
+
+                    <!-- Language Selector Button -->
+                    <button onclick="toggleLanguage()" class="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-full bg-brand-lilac hover:bg-purple-200 text-[10px] sm:text-xs font-bold text-brand-dark border border-brand-lilacBorder transition">
+                        <i class="fa-solid fa-globe text-brand-pink"></i>
+                        <span id="langLabel">EN</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative overflow-hidden bg-gradient-to-b from-brand-blush via-white to-gray-50 pt-8 pb-16 px-4 sm:px-6 lg:px-8">
+        <div class="absolute -right-20 -top-20 w-96 h-96 bg-brand-pink/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-20 top-40 w-96 h-96 bg-brand-yellow/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            
+            <!-- CENTRAL ANNOUNCEMENT BANNER (LANZAMIENTO) -->
+            <div class="max-w-3xl mx-auto mb-8 bg-gradient-to-r from-brand-yellow via-yellow-300 to-brand-yellow p-4 sm:p-5 rounded-3xl border-2 border-amber-400 shadow-lg yellow-glow text-center transform hover:scale-[1.01] transition">
+                <div class="font-display font-black text-red-600 text-base sm:text-lg uppercase tracking-wide">
+                    <span data-i18n="promoTitle">📣 Campaña por Lanzamiento 📣</span>
+                </div>
+                <p class="text-brand-dark font-extrabold text-sm sm:text-base mt-1" data-i18n="promoText">
+                    ¡Documento en Notaría Gratis, para los primeros 100 dueños en registrar su propiedad con nosotros!
+                </p>
+            </div>
+
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-pink/10 border border-brand-pink/30 text-brand-pink font-bold text-xs uppercase tracking-wider mb-4">
+                    <i class="fa-solid fa-handshake"></i> <span data-i18n="heroBadge">100% directo con el propietario</span>
+                </span>
+                <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-dark tracking-tight leading-tight mb-4">
+                    <span data-i18n="heroTitleStart">Encuentra tu nuevo hogar,</span> 
+                    <span class="bg-gradient-to-r from-brand-pink to-purple-600 bg-clip-text text-transparent" data-i18n="heroTitleHighlight">sin comisiones abusivas</span>
+                </h1>
+                <p class="text-gray-600 text-base sm:text-lg leading-relaxed" data-i18n="heroSubtitle">
+                    Casas, departamentos y edificios corporativos. Habla directamente por WhatsApp con el dueño.
+                </p>
+            </div>
+
+            <!-- SEARCH & FILTER BAR -->
+            <div class="max-w-4xl mx-auto bg-white border-2 border-brand-lilacBorder rounded-3xl p-4 sm:p-6 shadow-xl vivid-glow">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Operation Filter -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1.5" data-i18n="filterOperation">Operación</label>
+                        <select id="searchOperation" onchange="applyFilters()" class="w-full px-3.5 py-3 bg-brand-blush/60 border border-brand-lilacBorder rounded-xl text-xs font-semibold text-brand-dark focus:outline-none focus:border-brand-pink">
+                            <option value="Todos" data-i18n="optAll">Todos</option>
+                            <option value="Alquiler" data-i18n="optRent">Alquiler</option>
+                            <option value="Venta" data-i18n="optBuy">Venta</option>
+                        </select>
+                    </div>
+
+                    <!-- Property Type Filter -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1.5" data-i18n="filterType">Tipo de Propiedad</label>
+                        <select id="searchType" onchange="applyFilters()" class="w-full px-3.5 py-3 bg-brand-blush/60 border border-brand-lilacBorder rounded-xl text-xs font-semibold text-brand-dark focus:outline-none focus:border-brand-pink">
+                            <option value="Todos" data-i18n="optAll">Todos</option>
+                            <option value="Casa" data-i18n="optHouse">Casa</option>
+                            <option value="Departamento" data-i18n="optApartment">Departamento</option>
+                            <option value="Corporativo" data-i18n="optCorporate">Edificio Corporativo</option>
+                        </select>
+                    </div>
+
+                    <!-- Zone Filter (Santa Cruz) -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1.5" data-i18n="filterZone">Zona en Santa Cruz</label>
+                        <select id="searchZone" onchange="applyFilters()" class="w-full px-3.5 py-3 bg-brand-blush/60 border border-brand-lilacBorder rounded-xl text-xs font-semibold text-brand-dark focus:outline-none focus:border-brand-pink">
+                            <option value="Todas" data-i18n="optAllZones">Todas las zonas</option>
+                            <option value="Equipetrol">Equipetrol / Sirari</option>
+                            <option value="Urubó">El Urubó</option>
+                            <option value="Zona Norte">Zona Norte (Banzer)</option>
+                            <option value="Centro">Centro Histórico</option>
+                            <option value="Las Palmas">Las Palmas</option>
+                        </select>
+                    </div>
+
+                    <!-- Search Button -->
+                    <div class="flex items-end">
+                        <button onclick="applyFilters()" class="w-full py-3 px-4 bg-brand-pink hover:bg-brand-pinkHover text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition flex items-center justify-center gap-2 shadow-md">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <span data-i18n="btnSearch">Buscar Propiedades</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUE PROPOSITION BANNER -->
+    <section class="bg-brand-lilac/40 border-y border-brand-lilacBorder py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="p-4 bg-white rounded-2xl border border-brand-lilacBorder shadow-sm flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-brand-pink/10 text-brand-pink flex items-center justify-center text-xl mb-3">
+                        <i class="fa-solid fa-ban font-bold"></i>
+                    </div>
+                    <h3 class="font-display text-base font-bold text-brand-dark" data-i18n="val1Title">Sin Comisión de Agentes</h3>
+                    <p class="text-xs text-gray-600 mt-1" data-i18n="val1Desc">Ahórrate el 100% de los honorarios o comisiones infladas de inmobiliarias intermediarias.</p>
+                </div>
+
+                <div class="p-4 bg-white rounded-2xl border border-brand-lilacBorder shadow-sm flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-3">
+                        <i class="fa-brands fa-whatsapp font-bold"></i>
+                    </div>
+                    <h3 class="font-display text-base font-bold text-brand-dark" data-i18n="val2Title">Trato Directo por WhatsApp</h3>
+                    <p class="text-xs text-gray-600 mt-1" data-i18n="val2Desc">Haz preguntas, coordina visitas y negocia directo con el dueño legítimo de la casa.</p>
+                </div>
+
+                <div class="p-4 bg-white rounded-2xl border border-brand-lilacBorder shadow-sm flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-brand-yellow/30 text-amber-700 flex items-center justify-center text-xl mb-3">
+                        <i class="fa-solid fa-shield-check font-bold"></i>
+                    </div>
+                    <h3 class="font-display text-base font-bold text-brand-dark" data-i18n="val3Title">Propiedades Verificadas</h3>
+                    <p class="text-xs text-gray-600 mt-1" data-i18n="val3Desc">Publicaciones filtradas manualmente en Santa Cruz de la Sierra para evitar fraudes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN PROPERTY LISTINGS SECTOR (INQUILINOS / COMPRADORES) -->
+    <section id="propiedades" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        
+        <!-- Category Filter Tabs -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+            <div>
+                <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-brand-dark" data-i18n="secTitleProperties">Propiedades Disponibles en Santa Cruz</h2>
+                <p class="text-xs text-gray-500 mt-1" data-i18n="secSubProperties">Explora las mejores opciones para alquilar o comprar sin pagar comisión a terceros.</p>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-2">
+                <button onclick="filterCategory('all')" class="tab-btn active px-4 py-2 rounded-xl text-xs font-bold bg-brand-pink text-white shadow-md transition whitespace-nowrap" data-i18n="tabAll">Todas</button>
+                <button onclick="filterCategory('Alquiler')" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-gray-700 border border-gray-200 hover:border-brand-pink transition whitespace-nowrap" data-i18n="tabRent">Alquileres</button>
+                <button onclick="filterCategory('Venta')" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-gray-700 border border-gray-200 hover:border-brand-pink transition whitespace-nowrap" data-i18n="tabBuy">Ventas</button>
+                <button onclick="filterCategory('Corporativo')" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-white text-gray-700 border border-gray-200 hover:border-brand-pink transition whitespace-nowrap" data-i18n="tabCorporate">Edificios / Oficinas</button>
+            </div>
+        </div>
+
+        <!-- PROPERTY GRID CONTAINER -->
+        <div id="propertiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Property cards will be injected dynamically via JS -->
+        </div>
+    </section>
+
+    <!-- SECTOR PARA PROPIETARIOS ("PUBLICAR MI PROPIEDAD") -->
+    <section id="propietarios" class="bg-gradient-to-r from-brand-blush via-brand-lilac/50 to-brand-blush py-16 border-y border-brand-lilacBorder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div>
+                    <span class="inline-block px-3 py-1 rounded-full bg-brand-yellow text-brand-dark text-xs font-extrabold uppercase tracking-wider mb-4 shadow-sm" data-i18n="ownerBadge">¿Eres Propietario en Santa Cruz?</span>
+                    <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-brand-dark leading-tight mb-4">
+                        <span data-i18n="ownerTitleStart">Publica tu inmueble y vende o alquila</span> 
+                        <span class="text-brand-pink" data-i18n="ownerTitleHighlight">directamente sin intermediarios</span>
+                    </h2>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-6" data-i18n="ownerDesc">
+                        Olvídate de pagar comisiones del 3% al 5% o entregar la exclusiva de tu inmueble. En mikasa.bo los interesados te contactan directo a tu WhatsApp personal.
+                    </p>
+
+                    <div class="space-y-3 mb-8">
+                        <div class="flex items-center gap-3">
+                            <div class="w-7 h-7 rounded-full bg-brand-pink text-white flex items-center justify-center text-xs font-bold">1</div>
+                            <span class="text-xs font-bold text-gray-800" data-i18n="step1">Completa el formulario con los detalles y fotos de tu casa o dpto.</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-7 h-7 rounded-full bg-brand-pink text-white flex items-center justify-center text-xs font-bold">2</div>
+                            <span class="text-xs font-bold text-gray-800" data-i18n="step2">Ingresa tu número directo de WhatsApp en Bolivia (+591).</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-7 h-7 rounded-full bg-brand-pink text-white flex items-center justify-center text-xs font-bold">3</div>
+                            <span class="text-xs font-bold text-gray-800" data-i18n="step3">¡Listo! Recibe consultas directas de inquilinos y compradores reales.</span>
+                        </div>
+                    </div>
+
+                    <button onclick="openPublishModal()" class="px-6 py-4 rounded-2xl bg-brand-pink hover:bg-brand-pinkHover text-white font-extrabold text-xs uppercase tracking-wider vivid-glow transition transform hover:-translate-y-0.5 flex items-center gap-3">
+                        <i class="fa-solid fa-house-medical text-base"></i>
+                        <span data-i18n="btnPublishNow">Publicar mi Propiedad Ahora</span>
+                    </button>
+                </div>
+
+                <!-- Visual Decorative Card -->
+                <div class="bg-white p-8 rounded-3xl border-2 border-brand-lilacBorder shadow-xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-brand-yellow px-4 py-1.5 rounded-bl-2xl text-[11px] font-extrabold text-brand-dark uppercase tracking-wider" data-i18n="cardSimTitle">Ejemplo de Publicación Directa</div>
+                    
+                    <div class="flex items-center gap-4 mb-6 pt-2">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-brand-pink to-pink-400 text-white flex items-center justify-center text-2xl font-bold">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-display text-base font-bold text-brand-dark">Arq. Roberto Aguilera</h4>
+                            <p class="text-xs text-gray-500">Propietario en Equipetrol • Santa Cruz</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-blush/60 p-4 rounded-2xl border border-brand-lilacBorder mb-6">
+                        <p class="text-xs text-gray-700 italic">"Logré alquilar mi departamento en la Zona Norte en menos de 5 días directamente con un inquilino corporativo. Sin pagar un solo boliviano a agentes ni agencias intermediarias."</p>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs text-gray-600 border-t border-gray-100 pt-4">
+                        <span><i class="fa-solid fa-eye text-brand-pink mr-1"></i> +450 vistas directas</span>
+                        <span class="font-bold text-emerald-600"><i class="fa-brands fa-whatsapp text-sm mr-1"></i> Trato Concluido</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL 1: DETALLES DE PROPIEDAD -->
+    <div id="detailsModal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative border-2 border-brand-lilacBorder">
+            <button onclick="closeDetailsModal()" class="absolute top-5 right-5 text-gray-400 hover:text-brand-pink text-2xl w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div id="modalContent">
+                <!-- Content generated via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: PUBLICAR PROPIEDAD (FORMULARIO PROPIETARIO) -->
+    <div id="publishModal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative border-2 border-brand-lilacBorder">
+            <button onclick="closePublishModal()" class="absolute top-5 right-5 text-gray-400 hover:text-brand-pink text-2xl w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="mb-6 border-b border-brand-lilacBorder pb-4">
+                <span class="text-xs font-bold text-brand-pink uppercase tracking-wider" data-i18n="modalPubCategory">Trato Directo • Sin Comisión</span>
+                <h3 class="font-display text-2xl font-extrabold text-brand-dark mt-1" data-i18n="modalPubTitle">Publicar mi Propiedad en Santa Cruz</h3>
+                <p class="text-xs text-gray-500 mt-1" data-i18n="modalPubSubtitle">Completa los datos para conectar con inquilinos o compradores interesados.</p>
+            </div>
+
+            <form id="publishForm" onsubmit="handlePublishSubmit(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1" data-i18n="formTitle">Título del Inmueble</label>
+                        <input type="text" id="pubTitle" required placeholder="Ej: Hermoso Dpto 2 Dorm en Equipetrol" class="w-full px-4 py-3 bg-brand-blush/40 border border-brand-lilacBorder rounded-xl text-xs text-brand-dark focus:outline-none focus:border-brand-pink">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1" data-i18n="formOperation">Tipo de Operación</label>
+                        <select id="pubOperation" required class="w-full px-4 py-3 bg-brand-blush/40 border border-brand-lilacBorder rounded-xl text-xs text-brand-dark focus:outline-none focus:border-brand-pink">
+                            <option value="Alquiler">Alquiler</option>
+                            <option value="Venta">Venta</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1" data-i18n="formCategory">Categoría</label>
+                        <select id="pubType" required class="w-full px-4 py-3 bg-brand-blush/40 border border-brand-lilacBorder rounded-xl text-xs text-brand-dark focus:outline-none focus:border-brand-pink">
+                            <option value="Departamento">Departamento</option>
+                            <option value="Casa">Casa / Chalet</option>
+                            <option value="Corporativo">Edificio / Oficina</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1" data-i18n="formZone">Zona en Santa Cruz</label>
+                        <select id="pubZone" required class="w-full px-4 py-3 bg-brand-blush/40 border border-brand-lilacBorder rounded-xl text-xs text-brand-dark focus:outline-none focus:border-brand-pink">
+                            <option value="Equipetrol">Equipetrol</option>
+                            <option value="Urubó">El Urubó</option>
+                            <option value="Zona Norte">Zona Norte</option>
+                            <option value="Centro">Centro</option>
+                            <option value="Las Palmas">Las Palmas</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1" data-i18n="formPrice">Precio (USD / Mes o Total)</label>
+                        <input type="number" id="pubPrice" required placeholder="750" class="w-full px-4 py-3 bg-brand-blush/40 border border-brand-lilacBorder rounded-xl text-xs text-brand-dark focus:outline-none focus:border-brand-pink">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1" data-i18n="formBedrooms">Dormitorios</label>
+                        <input type="number" id="pubBeds" value="2" min="0" class="w-full px-4 py-3 bg-brand-blush/40 border border-brand-lilacBorder rounded-xl text-xs text-brand-dark focus:outline-none focus:border-brand-pink">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1" data-i18n="formBathrooms">Baños</label>
+                        <input type="number" id="pubBaths" value="2" min="0" class="w-full px-4 py-3 bg-brand-blush/40 border border-brand-lilacBorder rounded-xl text-xs text-brand-dark focus:outline-none focus:border-brand-pink">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-700 mb-1" data-i18n="formArea">Superficie (m²)</label>
+                        <input type="number" id="pubArea" value="85" class="w-full px-4 py-3 bg-brand-blush/40 border border-brand-lilacBorder rounded-xl text-xs text-brand-dark focus:outline-none focus:border-brand-pink">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-gray-700 mb-1" data-i18n="formWhatsApp">Tu WhatsApp (Bolivia +591)</label>
+                    <input type="text" id="pubPhone" required placeholder="+591 7XXXXXXX" class="w-full px-4 py-3 bg-brand-blush/40 border border-brand-lilacBorder rounded-xl text-xs text-brand-dark focus:outline-none focus:border-brand-pink">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase text-gray-700 mb-1" data-i18n="formDesc">Descripción de la Propiedad</label>
+                    <textarea id="pubDesc" rows="3" required placeholder="Describe amenidades, garaje, churrasquera, balcón..." class="w-full px-4 py-3 bg-brand-blush/40 border border-brand-lilacBorder rounded-xl text-xs text-brand-dark focus:outline-none focus:border-brand-pink"></textarea>
+                </div>
+
+                <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center gap-3">
+                    <i class="fa-solid fa-lock text-emerald-600 text-base"></i>
+                    <p class="text-[11px] text-emerald-800 font-semibold" data-i18n="formPolicy">Garantizamos que el contacto será directo. No compartimos tus datos con inmobiliarias.</p>
+                </div>
+
+                <button type="submit" class="w-full py-4 bg-brand-yellow hover:bg-brand-yellowHover text-brand-dark font-extrabold text-xs uppercase tracking-wider rounded-xl yellow-glow transition" data-i18n="btnSubmitProperty">
+                    Publicar Inmueble Gratis
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toastNotification" class="fixed bottom-6 right-6 bg-brand-dark text-white px-5 py-4 rounded-2xl shadow-2xl hidden items-center gap-3 z-50 border border-brand-pink">
+        <i class="fa-solid fa-circle-check text-brand-yellow text-xl"></i>
+        <div>
+            <span id="toastMessage" class="text-xs font-bold block">¡Propiedad Publicada!</span>
+            <span id="toastSub" class="text-[10px] text-gray-300 block">Tu inmueble ya está visible en Santa Cruz.</span>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-dark text-white pt-16 pb-12 border-t-4 border-brand-pink">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                
+                <!-- Col 1: Brand Info -->
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-9 h-9 rounded-xl bg-brand-pink flex items-center justify-center text-white text-lg font-bold">
+                            <i class="fa-solid fa-house-circle-check"></i>
+                        </div>
+                        <span class="font-display text-2xl font-extrabold text-white tracking-tight">mi<span class="text-brand-pink">kasa</span>.bo</span>
+                    </div>
+                    <p class="text-xs text-gray-400 leading-relaxed mb-4" data-i18n="footerAbout">
+                        La primera plataforma en Bolivia dedicada exclusivamente a conectar inquilinos y compradores directamente con el propietario. Sin comisiones abusivas de inmobiliarias.
+                    </p>
+                    <div class="flex flex-col gap-2 text-xs text-gray-300">
+                        <a href="https://www.instagram.com/mikasa.bo" target="_blank" rel="noopener" class="flex items-center gap-2.5 hover:text-brand-pink transition"><i class="fa-brands fa-instagram text-base w-5 text-center"></i> Instagram: @mikasa.bo</a>
+                        <a href="https://www.facebook.com/mikasa.bo" target="_blank" rel="noopener" class="flex items-center gap-2.5 hover:text-brand-pink transition"><i class="fa-brands fa-facebook-f text-base w-5 text-center"></i> Facebook: mikasa.bo</a>
+                        <a href="https://www.tiktok.com/@mikasa.bo" target="_blank" rel="noopener" class="flex items-center gap-2.5 hover:text-brand-pink transition"><i class="fa-brands fa-tiktok text-base w-5 text-center"></i> TikTok: mikasa.bo</a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Zones in Santa Cruz -->
+                <div>
+                    <h4 class="font-display text-sm font-bold text-brand-yellow uppercase tracking-wider mb-4" data-i18n="footZonesTitle">Zonas Populares</h4>
+                    <ul class="space-y-2 text-xs text-gray-400">
+                        <li><a href="#" onclick="filterZoneDirect('Equipetrol')" class="hover:text-brand-pink transition">Alquileres en Equipetrol</a></li>
+                        <li><a href="#" onclick="filterZoneDirect('Urubó')" class="hover:text-brand-pink transition">Casas de Lujo en El Urubó</a></li>
+                        <li><a href="#" onclick="filterZoneDirect('Zona Norte')" class="hover:text-brand-pink transition">Departamentos en Zona Norte</a></li>
+                        <li><a href="#" onclick="filterZoneDirect('Centro')" class="hover:text-brand-pink transition">Oficinas en Centro Histórico</a></li>
+                        <li><a href="#" onclick="filterZoneDirect('Las Palmas')" class="hover:text-brand-pink transition">Residencias en Las Palmas</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Quick Links -->
+                <div>
+                    <h4 class="font-display text-sm font-bold text-brand-yellow uppercase tracking-wider mb-4" data-i18n="footLinksTitle">Enlaces Rápido</h4>
+                    <ul class="space-y-2 text-xs text-gray-400">
+                        <li><a href="#propietarios" class="hover:text-brand-pink transition" data-i18n="footLinkPost">Publicar mi Propiedad</a></li>
+                        <li><a href="#propiedades" onclick="filterCategory('Alquiler')" class="hover:text-brand-pink transition" data-i18n="footLinkRent">Ver Alquileres Directos</a></li>
+                        <li><a href="#propiedades" onclick="filterCategory('Venta')" class="hover:text-brand-pink transition" data-i18n="footLinkBuy">Ver Ventas Directas</a></li>
+                        <li><a href="#propiedades" onclick="filterCategory('Corporativo')" class="hover:text-brand-pink transition" data-i18n="footLinkCorp">Edificios Corporativos</a></li>
+                    </ul>
+                </div>
+
+                
+            </div>
+
+            <!-- Bottom Legal Bar -->
+            <div class="border-t border-gray-800 pt-8 text-center text-xs text-gray-500">
+                <p data-i18n="copyRights">© 2026 mikasa.bo - Plataforma Inmobiliaria Directa de Bolivia. Todos los derechos reservados.</p>
+                <p class="text-[10px] text-gray-600 mt-1">Bolivia</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- APP JAVASCRIPT LOGIC & INTERNATIONALIZATION -->
+    <script>
+        // DICTIONARY / I18N DATA (ES / EN)
+        const i18n = {
+            es: {
+                tagDirectDeal: "Trato Directo",
+                menuSearchCity: "Buscar por ciudad",
+                navRent: "Alquileres",
+                navBuy: "Ventas",
+                navCorporate: "Edificios / Corporativo",
+                navOwners: "Propietarios",
+                btnPublishFree: "Publicar Gratis",
+                promoTitle: "📣 Campaña por Lanzamiento 📣",
+                promoText: "¡Documento en Notaría Gratis, para los primeros 100 dueños en registrar su propiedad con nosotros!",
+                heroBadge: "100% directo con el propietario",
+                heroTitleStart: "Encuentra tu nuevo hogar,",
+                heroTitleHighlight: "sin comisiones abusivas",
+                heroSubtitle: "Casas, departamentos y edificios corporativos en las mejores zonas de Bolivia. Habla directamente por WhatsApp con el dueño.",
+                filterOperation: "Operación",
+                filterType: "Tipo de Propiedad",
+                filterZone: "Zona / Ciudad",
+                optAll: "Todos",
+                optRent: "Alquiler",
+                optBuy: "Venta",
+                optHouse: "Casa",
+                optApartment: "Departamento",
+                optCorporate: "Edificio Corporativo",
+                optAllZones: "Todas las zonas",
+                btnSearch: "Buscar Propiedades",
+                val1Title: "Sin Comisión de Agentes",
+                val1Desc: "Ahórrate el 100% de los honorarios o comisiones infladas de inmobiliarias intermediarias.",
+                val2Title: "Trato Directo por WhatsApp",
+                val2Desc: "Haz preguntas, coordina visitas y negocia directo con el dueño legítimo de la casa.",
+                val3Title: "Propiedades Verificadas",
+                val3Desc: "Publicaciones filtradas manualmente en Bolivia para evitar fraudes.",
+                secTitleProperties: "Propiedades Disponibles",
+                secSubProperties: "Explora las mejores opciones para alquilar o comprar sin pagar comisión a terceros.",
+                tabAll: "Todas",
+                tabRent: "Alquileres",
+                tabBuy: "Ventas",
+                tabCorporate: "Edificios / Oficinas",
+                ownerBadge: "¿Eres Propietario?",
+                ownerTitleStart: "Publica tu inmueble y vende o alquila",
+                ownerTitleHighlight: "directamente sin intermediarios",
+                ownerDesc: "Olvídate de pagar comisiones del 3% al 5% o entregar la exclusiva de tu inmueble. En mikasa.bo los interesados te contactan directo a tu WhatsApp personal.",
+                step1: "Completa el formulario con los detalles y fotos de tu casa o dpto.",
+                step2: "Ingresa tu número directo de WhatsApp en Bolivia (+591).",
+                step3: "¡Listo! Recibe consultas directas de inquilinos y compradores reales.",
+                btnPublishNow: "Publicar mi Propiedad Ahora",
+                cardSimTitle: "Ejemplo de Publicación Directa",
+                modalPubCategory: "Trato Directo • Sin Comisión",
+                modalPubTitle: "Publicar mi Propiedad en Bolivia",
+                modalPubSubtitle: "Completa los datos para conectar con inquilinos o compradores interesados.",
+                formTitle: "Título del Inmueble",
+                formOperation: "Tipo de Operación",
+                formCategory: "Categoría",
+                formZone: "Zona / Ciudad",
+                formPrice: "Precio (USD / Mes o Total)",
+                formBedrooms: "Dormitorios",
+                formBathrooms: "Baños",
+                formArea: "Superficie (m²)",
+                formWhatsApp: "Tu WhatsApp (Bolivia +591)",
+                formDesc: "Descripción de la Propiedad",
+                formPolicy: "Garantizamos que el contacto será directo. No compartimos tus datos con inmobiliarias.",
+                btnSubmitProperty: "Publicar Inmueble Gratis",
+                footZonesTitle: "Zonas Populares",
+                footLinksTitle: "Enlaces Rápido",
+                footLinkPost: "Publicar mi Propiedad",
+                footLinkRent: "Ver Alquileres Directos",
+                footLinkBuy: "Ver Ventas Directas",
+                footLinkCorp: "Edificios Corporativos",
+                footContactTitle: "Contacto Bolivia",
+                footerAbout: "La primera plataforma en Bolivia dedicada exclusivamente a conectar inquilinos y compradores directamente con el propietario. Sin comisiones abusivas de inmobiliarias.",
+                copyRights: "© 2026 mikasa.bo - Plataforma Inmobiliaria Directa de Bolivia. Todos los derechos reservados."
+            },
+            en: {
+                tagDirectDeal: "Direct Deal",
+                menuSearchCity: "Search by City",
+                navRent: "Rentals",
+                navBuy: "For Sale",
+                navCorporate: "Corporate Buildings",
+                navOwners: "Property Owners",
+                btnPublishFree: "Post for Free",
+                promoTitle: "📣 Launch Campaign 📣",
+                promoText: "FREE notarized document for the first 100 owners to register their property with us!",
+                heroBadge: "100% direct with property owner",
+                heroTitleStart: "Find your new home,",
+                heroTitleHighlight: "without abusive commissions",
+                heroSubtitle: "Houses, apartments, and corporate buildings in Bolivia. Talk directly via WhatsApp with the owner.",
+                filterOperation: "Operation",
+                filterType: "Property Type",
+                filterZone: "Zone / City",
+                optAll: "All",
+                optRent: "Rent",
+                optBuy: "Buy",
+                optHouse: "House",
+                optApartment: "Apartment",
+                optCorporate: "Corporate Building",
+                optAllZones: "All zones",
+                btnSearch: "Search Properties",
+                val1Title: "Zero Agent Commissions",
+                val1Desc: "Save 100% of unfair agent fees or inflated real estate broker commissions.",
+                val2Title: "Direct WhatsApp Contact",
+                val2Desc: "Ask questions, schedule tours, and negotiate directly with the verified owner.",
+                val3Title: "Verified Listings",
+                val3Desc: "Manually reviewed listings across Bolivia to ensure authenticity.",
+                secTitleProperties: "Available Properties",
+                secSubProperties: "Explore prime places to rent or buy without paying third-party agent fees.",
+                tabAll: "All",
+                tabRent: "Rentals",
+                tabBuy: "For Sale",
+                tabCorporate: "Corporate / Offices",
+                ownerBadge: "Are you a Property Owner?",
+                ownerTitleStart: "List your property and rent or sell",
+                ownerTitleHighlight: "directly with zero middleman",
+                ownerDesc: "Forget paying 3% to 5% commissions or granting exclusive broker rights. On mikasa.bo, interested clients message your WhatsApp directly.",
+                step1: "Fill in the simple form with photos & details of your home.",
+                step2: "Enter your direct WhatsApp contact number (+591 Bolivia).",
+                step3: "Done! Receive direct inquiries from real buyers and tenants.",
+                btnPublishNow: "Publish My Property Now",
+                cardSimTitle: "Direct Listing Example",
+                modalPubCategory: "Direct Deal • No Commission",
+                modalPubTitle: "Publish Property in Bolivia",
+                modalPubSubtitle: "Fill out details to connect directly with interested tenants or buyers.",
+                formTitle: "Property Title",
+                formOperation: "Operation Type",
+                formCategory: "Category",
+                formZone: "Zone / City",
+                formPrice: "Price (USD / Month or Total)",
+                formBedrooms: "Bedrooms",
+                formBathrooms: "Bathrooms",
+                formArea: "Surface Area (m²)",
+                formWhatsApp: "Your WhatsApp (Bolivia +591)",
+                formDesc: "Property Description",
+                formPolicy: "We guarantee direct owner contact. We never share your data with broker agencies.",
+                btnSubmitProperty: "Publish Property For Free",
+                footZonesTitle: "Popular Zones",
+                footLinksTitle: "Quick Links",
+                footLinkPost: "List My Property",
+                footLinkRent: "View Direct Rentals",
+                footLinkBuy: "View Direct Sales",
+                footLinkCorp: "Corporate Buildings",
+                footContactTitle: "Bolivia Contact",
+                footerAbout: "The premier platform in Bolivia focused on connecting tenants and buyers directly with homeowners. No abusive realtor fees.",
+                copyRights: "© 2026 mikasa.bo - Bolivia Direct Real Estate Platform. All rights reserved."
+            }
+        };
+
+        let currentLang = 'es';
+        let activeCategory = 'all';
+
+        // DROPDOWN MENU FOR CITIES
+        function toggleCityMenu() {
+            const menu = document.getElementById('cityMenuDropdown');
+            menu.classList.toggle('hidden');
+        }
+
+        function selectCity(cityName) {
+            document.getElementById('searchZone').value = cityName === 'Santa Cruz' ? 'Equipetrol' : 'Todas';
+            toggleCityMenu();
+            applyFilters();
+            window.location.hash = "#propiedades";
+        }
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e) {
+            const menu = document.getElementById('cityMenuDropdown');
+            const button = e.target.closest('button');
+            if (!menu.contains(e.target) && (!button || !button.getAttribute('onclick')?.includes('toggleCityMenu'))) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        // SAMPLE REAL ESTATE PROPERTIES IN BOLIVIA
+        let properties = [
+            {
+                id: 1,
+                title: "Departamento Moderno 2 Dorm en Equipetrol",
+                titleEn: "Modern 2-Bed Apartment in Equipetrol",
+                operation: "Alquiler",
+                type: "Departamento",
+                zone: "Equipetrol",
+                priceUSD: 750,
+                priceBOB: 5220,
+                bedrooms: 2,
+                bathrooms: 2,
+                area: 95,
+                ownerName: "Ing. Carlos Gutiérrez",
+                ownerPhone: "59178011223",
+                images: [
+                    "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80"
+                ],
+                description: "Ubicación privilegiada a 2 cuadras de la Av. San Martín. Incluye parqueo subterráneo, churrasquera en terraza panorámica y seguridad 24h. Trato directo con el dueño.",
+                descriptionEn: "Prime location 2 blocks from San Martin Ave. Includes underground parking, rooftop BBQ area, and 24/7 security. Direct deal with owner."
+            },
+            {
+                id: 2,
+                title: "Residencia de Lujo con Piscina en El Urubó",
+                titleEn: "Luxury Mansion with Pool in El Urubó",
+                operation: "Venta",
+                type: "Casa",
+                zone: "Urubó",
+                priceUSD: 340000,
+                priceBOB: 2366000,
+                bedrooms: 4,
+                bathrooms: 5,
+                area: 420,
+                ownerName: "Dra. Patricia Justiniano",
+                ownerPhone: "59177399887",
+                images: [
+                    "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80"
+                ],
+                description: "Hermosa casa moderna en condominio cerrado en El Urubó. Finos acabados, amplio jardín privado, piscina, suite máster con vestidor doble. Trato directo sin agentes.",
+                descriptionEn: "Beautiful modern home in gated community in El Urubó. High-end finishes, large private garden, pool, master suite. Direct deal without agents."
+            },
+            {
+                id: 3,
+                title: "Departamento Ejecutivo Zona Sur (La Paz)",
+                titleEn: "Executive Apartment South Zone (La Paz)",
+                operation: "Alquiler",
+                type: "Departamento",
+                zone: "Zona Sur", city: "La Paz",
+                priceUSD: 850,
+                priceBOB: 5910,
+                bedrooms: 3,
+                bathrooms: 2,
+                area: 120,
+                ownerName: "Lic. Andrea Mendoza",
+                ownerPhone: "59172012345",
+                images: [
+                    "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80"
+                ],
+                description: "Ubicado en Calacoto, soleado todo el día. Cerca de la estación del Teleférico. Garaje para 1 vehículo. Directo con el propietario.",
+                descriptionEn: "Located in Calacoto, sunny all day long. Near Teleferico station. Parking included. Direct with owner."
+            }
+        ];
+
+        // INITIAL ON LOAD
+        window.onload = function() {
+            renderProperties(properties);
+        };
+
+        // LANGUAGE TOGGLE FUNCTION
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            document.getElementById('langLabel').innerText = currentLang === 'es' ? 'EN' : 'ES';
+
+            // Translate static texts
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[currentLang][key]) {
+                    el.innerText = i18n[currentLang][key];
+                }
+            });
+
+            // Re-render properties to update dynamic title/desc language
+            applyFilters();
+        }
+
+        // RENDER PROPERTY CARDS GRID
+        function renderProperties(items) {
+            const grid = document.getElementById('propertiesGrid');
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 bg-white rounded-3xl border border-brand-lilacBorder p-8">
+                        <i class="fa-solid fa-house-circle-xmark text-4xl text-brand-pink mb-3"></i>
+                        <h3 class="font-display text-lg font-bold text-brand-dark">No encontramos propiedades con esos filtros</h3>
+                        <p class="text-xs text-gray-500 mt-1">Intenta cambiando de zona o tipo de operación en Santa Cruz.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            items.forEach(prop => {
+                const title = currentLang === 'en' ? prop.titleEn : prop.title;
+                const desc = currentLang === 'en' ? prop.descriptionEn : prop.description;
+
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-3xl overflow-hidden border border-brand-lilacBorder hover:border-brand-pink/50 transition duration-300 flex flex-col justify-between group shadow-sm hover:shadow-xl";
+
+                card.innerHTML = `
+                    <div>
+                        <!-- Image Container & Badges -->
+                        <div class="relative h-56 overflow-hidden bg-gray-100">
+                            <img src="${prop.images[0]}" alt="${title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            
+                            <span class="absolute top-3 left-3 px-3 py-1 bg-brand-dark/90 backdrop-blur-md text-brand-yellow font-extrabold text-[10px] uppercase tracking-wider rounded-xl shadow-md">
+                                ${prop.operation === 'Corporativo' ? (currentLang === 'en' ? 'Corporate' : 'Corporativo') : prop.operation}
+                            </span>
+
+                            <span class="absolute top-3 right-3 px-2.5 py-1 bg-brand-pink text-white font-extrabold text-[10px] rounded-xl flex items-center gap-1 shadow-md">
+                                <i class="fa-solid fa-user-check"></i> ${currentLang === 'en' ? 'Direct Owner' : 'Trato Directo'}
+                            </span>
+
+                            <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-xl text-brand-dark font-extrabold text-sm shadow-md">
+                                $${prop.priceUSD.toLocaleString()} USD <span class="text-[10px] text-gray-500 font-normal">/ (${prop.priceBOB.toLocaleString()} BOB)</span>
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-5">
+                            <div class="flex items-center justify-between text-xs text-brand-pink font-bold mb-1">
+                                <span><i class="fa-solid fa-location-dot mr-1"></i> ${prop.zone}, ${prop.city || "Santa Cruz"}</span>
+                                <span class="text-gray-400 font-normal">${prop.type}</span>
+                            </div>
+
+                            <h3 class="font-display text-base font-bold text-brand-dark group-hover:text-brand-pink transition line-clamp-1 mb-2">${title}</h3>
+                            
+                            <p class="text-xs text-gray-600 line-clamp-2 mb-4 leading-relaxed">${desc}</p>
+
+                            <!-- Features List -->
+                            <div class="flex items-center gap-4 text-xs text-gray-500 pt-3 border-t border-gray-100">
+                                ${prop.bedrooms > 0 ? `<span class="flex items-center gap-1.5"><i class="fa-solid fa-bed text-brand-pink"></i> ${prop.bedrooms} Dorm</span>` : ''}
+                                <span class="flex items-center gap-1.5"><i class="fa-solid fa-bath text-brand-pink"></i> ${prop.bathrooms} Baños</span>
+                                <span class="flex items-center gap-1.5"><i class="fa-solid fa-ruler-combined text-brand-pink"></i> ${prop.area} m²</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer Actions -->
+                    <div class="p-5 pt-0 flex items-center gap-2">
+                        <button onclick="openDetailsModal(${prop.id})" class="flex-1 py-2.5 px-3 bg-brand-blush hover:bg-brand-lilac text-brand-pink font-extrabold text-xs rounded-xl transition flex items-center justify-center gap-1">
+                            <i class="fa-solid fa-circle-info"></i> ${currentLang === 'en' ? 'Details' : 'Ver Detalles'}
+                        </button>
+                        
+                        <a href="https://wa.me/${prop.ownerPhone}?text=${encodeURIComponent('Hola, vi tu propiedad en mikasa.bo: ' + title)}" target="_blank" class="flex-1 py-2.5 px-3 bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs rounded-xl transition flex items-center justify-center gap-1 shadow-md">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // CATEGORY TAB FILTERING
+        function filterCategory(cat) {
+            activeCategory = cat;
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-pink', 'text-white', 'shadow-md');
+                btn.classList.add('bg-white', 'text-gray-700', 'border');
+            });
+            event.target.classList.remove('bg-white', 'text-gray-700', 'border');
+            event.target.classList.add('bg-brand-pink', 'text-white', 'shadow-md');
+
+            applyFilters();
+        }
+
+        function filterZoneDirect(zoneName) {
+            document.getElementById('searchZone').value = zoneName;
+            applyFilters();
+            window.location.hash = "#propiedades";
+        }
+
+        function filterType(typeVal) {
+            document.getElementById('searchType').value = typeVal;
+            applyFilters();
+            window.location.hash = "#propiedades";
+        }
+
+        // APPLY COMBINED FILTERS
+        function applyFilters() {
+            const opVal = document.getElementById('searchOperation').value;
+            const typeVal = document.getElementById('searchType').value;
+            const zoneVal = document.getElementById('searchZone').value;
+
+            const filtered = properties.filter(p => {
+                const matchTab = activeCategory === 'all' || p.operation === activeCategory || p.type === activeCategory;
+                const matchOp = opVal === 'Todos' || p.operation === opVal;
+                const matchType = typeVal === 'Todos' || p.type === typeVal;
+                const matchZone = zoneVal === 'Todas' || p.zone === zoneVal;
+
+                return matchTab && matchOp && matchType && matchZone;
+            });
+
+            renderProperties(filtered);
+        }
+
+        // DETAILS MODAL
+        function openDetailsModal(id) {
+            const prop = properties.find(p => p.id === id);
+            if (!prop) return;
+
+            const title = currentLang === 'en' ? prop.titleEn : prop.title;
+            const desc = currentLang === 'en' ? prop.descriptionEn : prop.description;
+
+            const content = document.getElementById('modalContent');
+            content.innerHTML = `
+                <div class="mb-4">
+                    <span class="inline-block px-3 py-1 bg-brand-pink text-white font-extrabold text-[10px] rounded-xl uppercase tracking-wider mb-2">
+                        Trato Directo con el Propietario
+                    </span>
+                    <h3 class="font-display text-2xl font-extrabold text-brand-dark">${title}</h3>
+                    <p class="text-xs text-brand-pink font-bold mt-1"><i class="fa-solid fa-location-dot"></i> ${prop.zone}, ${prop.city || "Santa Cruz de la Sierra"}</p>
+                </div>
+
+                <!-- Main Photo -->
+                <div class="relative h-72 rounded-2xl overflow-hidden mb-6 bg-gray-100">
+                    <img src="${prop.images[0]}" class="w-full h-full object-cover">
+                    <div class="absolute bottom-4 left-4 bg-brand-dark/90 backdrop-blur-md px-4 py-2 rounded-xl text-brand-yellow font-extrabold text-lg">
+                        $${prop.priceUSD.toLocaleString()} USD <span class="text-xs text-white font-normal">(${prop.priceBOB.toLocaleString()} BOB)</span>
+                    </div>
+                </div>
+
+                <!-- Property Attributes -->
+                <div class="grid grid-cols-3 gap-4 p-4 bg-brand-blush/60 rounded-2xl border border-brand-lilacBorder text-center mb-6">
+                    <div>
+                        <span class="text-[10px] font-bold text-gray-500 uppercase block">Dormitorios</span>
+                        <span class="text-sm font-extrabold text-brand-dark"><i class="fa-solid fa-bed text-brand-pink mr-1"></i> ${prop.bedrooms}</span>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-bold text-gray-500 uppercase block">Baños</span>
+                        <span class="text-sm font-extrabold text-brand-dark"><i class="fa-solid fa-bath text-brand-pink mr-1"></i> ${prop.bathrooms}</span>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-bold text-gray-500 uppercase block">Superficie</span>
+                        <span class="text-sm font-extrabold text-brand-dark"><i class="fa-solid fa-ruler-combined text-brand-pink mr-1"></i> ${prop.area} m²</span>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-6">
+                    <h4 class="font-display text-sm font-bold text-brand-dark uppercase tracking-wider mb-2">Descripción General</h4>
+                    <p class="text-xs text-gray-600 leading-relaxed">${desc}</p>
+                </div>
+
+                <!-- Owner Contact Box -->
+                <div class="p-5 bg-gradient-to-r from-brand-blush to-white border-2 border-brand-lilacBorder rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                        <span class="text-[10px] text-gray-500 uppercase font-bold block">Propietario Legítimo</span>
+                        <h5 class="font-display text-base font-bold text-brand-dark">${prop.ownerName}</h5>
+                        <p class="text-xs text-emerald-600 font-semibold"><i class="fa-solid fa-shield-check"></i> Número de WhatsApp Verificado</p>
+                    </div>
+
+                    <a href="https://wa.me/${prop.ownerPhone}?text=${encodeURIComponent('Hola ' + prop.ownerName + ', estoy interesado en tu inmueble en mikasa.bo: ' + title)}" target="_blank" class="w-full sm:w-auto py-3 px-6 bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Contactar al Propietario
+                    </a>
+                </div>
+            `;
+
+            document.getElementById('detailsModal').classList.remove('hidden');
+        }
+
+        function closeDetailsModal() {
+            document.getElementById('detailsModal').classList.add('hidden');
+        }
+
+        // PUBLISH PROPIEDAD MODAL
+        function openPublishModal() {
+            document.getElementById('publishModal').classList.remove('hidden');
+        }
+
+        function closePublishModal() {
+            document.getElementById('publishModal').classList.add('hidden');
+        }
+
+        function handlePublishSubmit(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('pubTitle').value;
+            const op = document.getElementById('pubOperation').value;
+            const type = document.getElementById('pubType').value;
+            const zone = document.getElementById('pubZone').value;
+            const price = parseFloat(document.getElementById('pubPrice').value);
+            const beds = parseInt(document.getElementById('pubBeds').value);
+            const baths = parseInt(document.getElementById('pubBaths').value);
+            const area = parseInt(document.getElementById('pubArea').value);
+            const phone = document.getElementById('pubPhone').value;
+            const desc = document.getElementById('pubDesc').value;
+
+            const newProp = {
+                id: Date.now(),
+                title: title,
+                titleEn: title,
+                operation: op,
+                type: type,
+                zone: zone,
+                priceUSD: price,
+                priceBOB: price * 6.96,
+                bedrooms: beds,
+                bathrooms: baths,
+                area: area,
+                ownerName: "Propietario Verificado",
+                ownerPhone: phone.replace(/[^0-9]/g, ''),
+                images: [
+                    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+                ],
+                description: desc,
+                descriptionEn: desc
+            };
+
+            properties.unshift(newProp);
+            applyFilters();
+            closePublishModal();
+            document.getElementById('publishForm').reset();
+
+            // Show confirmation toast
+            const toast = document.getElementById('toastNotification');
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
